@@ -1,0 +1,18 @@
+version: '3'
+services:
+  db:
+    image: "microsoft/mssql-server-windows-developer"
+    ports:
+      - "1443:1443"
+    environment:
+      - sa_password=p@ssword1234
+      - ACCEPT_EULA=Y
+  octopus:
+    image: "octopusdeploy/octopusdeploy"
+    depends_on: 
+      - db
+    ports: 
+      - 81
+    environment:
+      - sqlDbConnectionString=server=db;user=sa;password=p@ssword1234;database=octopus
+    stdin_open: true

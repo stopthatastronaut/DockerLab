@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+  somerset:
+    image: "microsoft/mssql-server-windows-developer"
+    ports:
+      - "1443:1443"
+    environment:
+      - sa_password=p@ssword1234
+      - ACCEPT_EULA=Y
+  mills:
+    image: "microsoft/windowsservercore"
+    depends_on: 
+      - somerset
+    ports: 
+      - 81
+    environment:
+      - sqlDbConnectionString=server=somerset;user=sa;password=p@ssword1234;database=appdb      
+    stdin_open: true
+    tty: true
+  johndoe:
+    image: "microsoft/nanoserver"
+    depends_on: 
+      - somerset
+      - mills
+    ports:
+      - 81
+    environment:
+      - webServiceLayer=mills      
+    stdin_open: true
+    tty: true

@@ -1,0 +1,11 @@
+version: '3'
+services:
+  db:
+    image: "microsoft/mssql-server-windows-developer"
+    ports:
+      - "1443:1443"
+    environment:
+      - sa_password=p@ssword1234
+      - ACCEPT_EULA=Y
+    volumes:
+      - C:\SqlBackup:c:\SqlBackup

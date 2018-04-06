@@ -1,0 +1,21 @@
+{
+    "ConnectionString": "",
+    "CloudFlareApiKey": "",
+    "StatusCakeApiKey": "",
+    "HostedHubApiKey": "",
+    "HostedHubThumbprint": "",
+    "AWS": {
+        "Profile": "CloudPortal"
+    },
+    "Serilog": {
+        "WriteTo": [
+            {
+                "Name": "Seq",
+                "Args": {
+                    "serverUrl": "",
+                    "apiKey": ""
+                }
+            }
+        ]
+    }
+}
