@@ -28,6 +28,10 @@ docker-compose exec mills powershell -command ipmo ServerManager
 docker-compose exec mills powershell -command Add-WindowsFeature NFS-Client
 docker-compose exec mills powershell -command Get-WindowsFeature
 
+docker-compose exec mills powershell -command Get-LocalUser 
+
+docker-compose exec mills powershell -command Get-Command New-LocalUser 
+
 # stop 'em
 
 
