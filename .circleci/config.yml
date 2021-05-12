@@ -1,0 +1,24 @@
+﻿version: 2.1
+jobs:
+  build:
+    machine: true
+    # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:
+          name: Run tests
+          command: |
+            echo "$CIRCLE_BRANCH"
+            echo "$CIRCLE_BUILD_NUM"
+            echo "Tests go here, eventually"
+      - run:
+          name: Build and push Pwsh-DummyContainer
+          command: |
+            cd Pwsh-DummyContainer
+            TAG=0.1.$CIRCLE_BUILD_NUM
+            docker build -t stopthatastronaut/pwshdummycontainer:$TAG .
+            if [[ "$CIRCLE_BRANCH" == "master" ]]
+            then
+              echo $DOCKER_PASS | docker login -u stopthatastronaut --password-stdin
+              docker push stopthatastronaut/pwshdummycontainer:$TAG
+            fi
