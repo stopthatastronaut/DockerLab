@@ -19,7 +19,7 @@ jobs:
             docker build -t stopthatastronaut/pwshdummycontainer:$TAG .
             if [[ "$CIRCLE_BRANCH" == "master" ]]
             then
-              echo $DOCKER_PASS | docker login -u stopthatastronaut --password-stdin
+              echo $DOCKER_PASSWORD | docker login -u stopthatastronaut --password-stdin
               docker push stopthatastronaut/pwshdummycontainer:$TAG
             fi
       - run:
@@ -30,7 +30,7 @@ jobs:
             docker build -t stopthatastronaut/jasbrohome:$TAG .
             if [[ "$CIRCLE_BRANCH" == "master" ]]
             then
-              echo $DOCKER_PASS | docker login -u stopthatastronaut --password-stdin
+              echo $DOCKER_PASSWORD | docker login -u stopthatastronaut --password-stdin
               docker push stopthatastronaut/jasbrohome:$TAG
             fi
 
