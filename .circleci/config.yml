@@ -22,3 +22,14 @@ jobs:
               echo $DOCKER_PASS | docker login -u stopthatastronaut --password-stdin
               docker push stopthatastronaut/pwshdummycontainer:$TAG
             fi
+      - run:
+          name: Build and push the HOME-IP Updater
+          command: |
+            cd jasbro-home
+            TAG=0.1.$CIRCLE_BUILD_NUM
+            docker build -t stopthatastronaut/jasbrohome:$TAG .
+            if [[ "$CIRCLE_BRANCH" == "master" ]]
+            then
+              echo $DOCKER_PASS | docker login -u stopthatastronaut --password-stdin
+              docker push stopthatastronaut/jasbrohome:$TAG
+            fi
