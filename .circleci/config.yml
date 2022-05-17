@@ -33,3 +33,10 @@ jobs:
               echo $DOCKER_PASS | docker login -u stopthatastronaut --password-stdin
               docker push stopthatastronaut/jasbrohome:$TAG
             fi
+
+workflows:
+  build:
+    jobs:
+      - build:
+          context:
+            - DockerHub
