@@ -32,7 +32,7 @@ jobs:
             if [[ "$CIRCLE_BRANCH" == "master" ]]
             then
               echo $DOCKER_PASSWORD | docker login -u stopthatastronaut --password-stdin
-              docker push stopthatastronaut/jasbrohome --all-tags
+              docker push --all-tags stopthatastronaut/jasbrohome
             fi
 
 workflows:
