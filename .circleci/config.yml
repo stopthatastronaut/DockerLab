@@ -28,10 +28,11 @@ jobs:
             cd jasbro-home
             TAG=0.1.$CIRCLE_BUILD_NUM
             docker build -t stopthatastronaut/jasbrohome:$TAG .
+            docker tag stopthatastronaut/jasbrohome:latest
             if [[ "$CIRCLE_BRANCH" == "master" ]]
             then
               echo $DOCKER_PASSWORD | docker login -u stopthatastronaut --password-stdin
-              docker push stopthatastronaut/jasbrohome:$TAG
+              docker push stopthatastronaut/jasbrohome --all-tags
             fi
 
 workflows:
