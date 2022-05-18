@@ -4,10 +4,22 @@ from requests import get
 import os
 from dotenv import load_dotenv
 import json
+import logging
+import sys
+
+Log_Format = "%(levelname)s %(asctime)s - %(message)s"
+
+logging.basicConfig(
+                    stream = sys.stdout, 
+                    filemode = "w",
+                    format = Log_Format, 
+                    level = logging.INFO)
+
+log = logging.getLogger("jasbro-home")
 
 if ( os.getenv('USERDOMAIN') is not None ):
     if ( os.environ['USERDOMAIN'] == 'ALLMYAPESGONE'):   # local laptop. Don't do this.
-        print("Loading environment variables from .env file")
+        log.info("Loading environment variables from .env file")
         load_dotenv(".env")
 
 # which sub are we hitting?
@@ -22,7 +34,7 @@ dns_client = DnsManagementClient(
 )
 
 ip = get('https://api.ipify.org').text
-print('My public IP address appears to be: {}'.format(ip))
+log.info('My public IP address appears to be: {}'.format(ip))
 
 record_set = dns_client.record_sets.create_or_update(
 	os.environ["DNS_RG"],
@@ -39,4 +51,4 @@ record_set = dns_client.record_sets.create_or_update(
 	}
 )
 
-print(record_set.fqdn + " updated to " + ip)
+log.info(record_set.fqdn + " updated to " + ip)
